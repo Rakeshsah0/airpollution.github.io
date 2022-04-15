@@ -8,6 +8,7 @@ const componentsEle = document.querySelectorAll(".component-val")
 
 const appId = "5c9e8500fce110a2da4d6c10df2412b8"
 const link = "https://api.openweathermap.org/data/2.5/air_pollution"	// API end point
+let data=[]
 
 const getUserLocation = () => {
 	// Get user Location
@@ -78,20 +79,59 @@ const setValuesOfAir = airData => {
 	airQualityStat.style.color = color
 }
 
+function display() {
+		
+		console.log(data);
+		 // set the data
+		 // var data = [
+			 // 	{x: "Apple", value: 2235265},
+			 // 	{x: "Ball", value: 38929319},
+			 // 	{x: "American Indian and Alaska Native", value: 2932248},
+			 // 	{x: "Asian", value: 14674252},
+			 // 	{x: "Native Hawaiian and Other Pacific Islander", value: 540013},
+			 // 	{x: "Some Other Race", value: 19107368},
+			 // 	{x: "Two or More Races", value: 9009073}
+			 // ];
+			 
+			 // create the chart
+			 var chart = anychart.pie();
+			 
+			 // set the chart title
+			 chart.title("Pollution Index: 2022");
+			 
+			 // add the data
+			 chart.data(data);
+			 
+			 // display the chart in the container
+			 chart.container('container');
+			 chart.draw();
+			 return;
+
+}
+
 const setComponentsOfAir = airData => {
 	let components = {...airData.list[0].components}
+	// console.log(components);
 	componentsEle.forEach(ele => {
 		const attr = ele.getAttribute('data-comp')
+		data.push({x:attr,value:components[attr]});
 		ele.innerText = components[attr] += " μg/m³"
+		console.log(attr)
 	})
-}
-
-const onPositionGatherError = e => {
-	errorLabel.innerText = e.message
-}
-
-srchBtn.addEventListener("click", () => {
-	getAirQuality(parseFloat(latInp.value).toFixed(4), parseFloat(lonInp.value).toFixed(4))
-})
+	
+	const onPositionGatherError = e => {
+		errorLabel.innerText = e.message
+	}
+	
+	
+		
+	}
+	
+	srchBtn.addEventListener("click", () => {
+		data=[]
+	getAirQuality(parseFloat(latInp.value).toFixed(4), parseFloat(lonInp.value).toFixed(4)).then(()=>{
+		display();
+	})
+    })
 
 getUserLocation()
