@@ -128,6 +128,7 @@ const setComponentsOfAir = airData => {
 	}
 	
 	srchBtn.addEventListener("click", () => {
+		data=[]
 	getAirQuality(parseFloat(latInp.value).toFixed(4), parseFloat(lonInp.value).toFixed(4)).then(()=>{
 		display();
 	})
