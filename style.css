@@ -18,17 +18,12 @@
 	text-align: center;
 	font-family: 'Fira Code', monospace;
 	font-size: 3rem;
-	margin-bottom: 60px;
 }
 
 .sub-heading {
 	margin: 20px 0;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 2rem;
-}
-
-.location-container {
-	margin: 40px 0;
 }
 
 .loc-input {
@@ -78,4 +73,12 @@
 footer {
 	margin-top: 40px;
 	text-align: center;
+}
+
+
+.component-container{
+	display: flex;
+	height: 600px;
+	justify-content: space-around;
+	align-items: center;
 }
